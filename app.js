@@ -48,7 +48,23 @@
 const express = require("express");
 const app = express();
 
+// dotenv PAQUETE PARA CREAR VARIABLES DE ENTORNO (PROTEGIDAS)
+require('dotenv').config();
+// dotenv PAQUETE PARA CREAR VARIABLES DE ENTORNO (PROTEGIDAS)/
+
 const port = process.env.PORT || 3000;
+
+// MONGOOSE: Modelado para node.js, que incluye conexiones a mongodb
+// Conexión a db
+const mongoose = require('mongoose');
+
+
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.1x5j9.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`; // Conexión de MongoDb
+
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then(() => console.log('Base de datos conectada'))
+  .catch(e => console.log(e));
+// MONGOOSE: Modelado para node.js, que incluye conexiones a mongodb /
 
 app.listen(port, () => {
   console.log("Servidor ejecutandose desde puerto", port);
@@ -59,20 +75,13 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
 // 5.2 MIDDLEWARE: Se ejecuta una función, antes de realizar solicitudes
+// MIDDLEWARE: Cuando se implementa USE
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", (req, res) => {
-  //res.send("Respuesta desde EXPRESS v2");
-  res.render("index", { title: "Titulo para página renderizada ejs" });
-});
+// Rutas web
+app.use('/', require('./router/RutasWeb'));
 
-// para dirigirse a una página en concreto
-app.get("/servicios", (req, res) => {
-  //res.send("Se está en la página de servicios");
-  res.render("servicios", {
-    titleServices: "Titulo para página servicios ejs",
-  });
-});
+app.use('/mascotas', require('./router/Mascotas'));
 
 app.use((req, res, next) => {
   //res.status(404).sendfile(__dirname + "/public/404.html");
