@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
     //   arrayMascotas: [
     //     { id: 1, nombre: "Dante", descripcion: "Pastor alemán" },
     //     { id: 2, nombre: "Laika", descripcion: "Criolla" },
+    // PRUEBA
     //   ],
     });
   } catch (error) {
