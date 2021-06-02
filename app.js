@@ -48,6 +48,12 @@
 const express = require("express");
 const app = express();
 
+// MÓDULO PARA LEER INFORMACION DESDE FORMULARIO
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+// MÓDULO PARA LEER INFORMACION DESDE FORMULARIO/
+
 // dotenv PAQUETE PARA CREAR VARIABLES DE ENTORNO (PROTEGIDAS)
 require('dotenv').config();
 // dotenv PAQUETE PARA CREAR VARIABLES DE ENTORNO (PROTEGIDAS)/

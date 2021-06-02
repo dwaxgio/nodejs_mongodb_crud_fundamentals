@@ -1,13 +1,15 @@
 <%- include("template/cabecera", {titleCabecera: "index"}) %>
 
 <div class="container">
+  <h1>CRUD Mongo</h1>
+  <a class="btn btn-success btn-block my-4" href="/mascotas/crear">Crear nueva mascota</a>
   <table class="table">
     <thead>
       <tr>
         <th scope="col">id</th>
         <th scope="col">nombre</th>
         <th scope="col">descripción</th>
-        <th scope="col">acción</th>
+        <th scope="col">editar</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +20,7 @@
         <td><%=mascota.nombre %></td>
         <td><%=mascota.descripcion %></td>
         <td>
-          <button type="button" class="btn btn-primary">Editar</button>
+          <a href="/mascotas/<%=mascota.id %>" type="button" class="btn btn-warning">Editar</a>
         </td>
       </tr>
       <% }) %> <% } %>
